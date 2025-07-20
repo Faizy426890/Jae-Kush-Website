@@ -1,17 +1,29 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Mail, MenuIcon } from "lucide-react"
+import { Mail, MenuIcon, X } from "lucide-react"
 import MusicSection from "./components/Music-Section"
-import SocialSection from "./components/Social" 
+import SocialSection from "./components/Social"
 import ContactSection from "./components/contact-section"
-import HeroSection from "./components/Hero-section" 
+import HeroSection from "./components/Hero-section"
 import OutNowSection from "./components/outnow-section"
+import { useState } from "react"
 
 export default function BlacRubyPortfolio() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  // Function to handle navigation and close sidebar
+  const handleNavClick = (sectionId: string) => {
+    setIsSidebarOpen(false)
+    // Small delay to allow sidebar to start closing before scrolling
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+    }, 100)
+  }
+
   // Variants for animations
   const headingVariants = {
     hidden: { opacity: 0, x: -100 },
@@ -46,12 +58,124 @@ export default function BlacRubyPortfolio() {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
   }
 
+  // Sidebar animation variants
+  const sidebarVariants = {
+    closed: {
+      x: "-100%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+    open: {
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+  }
+
+  const overlayVariants = {
+    closed: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    open: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  }
+
   // Updated card styling for a cleaner, professional look
   const cardBaseClasses = "bg-blac-ruby-card-bg border border-white/10 rounded-xl shadow-lg shadow-black/20"
   const cardHoverClasses = "hover:scale-[1.02] transition-transform duration-300 ease-in-out"
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blac-ruby-dark-blue to-blac-ruby-deep-purple text-white font-sans overflow-hidden">
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              variants={overlayVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              onClick={() => setIsSidebarOpen(false)}
+            />
+            
+            {/* Sidebar */}
+            <motion.div
+              className="fixed top-0 left-0 h-full w-80 bg-blac-ruby-black/95 backdrop-blur-md z-50 md:hidden border-r border-white/10"
+              variants={sidebarVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+            >
+              <div className="flex flex-col h-full">
+                {/* Sidebar Header */}
+                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                  <Link href="#" className="text-2xl font-bold text-blac-ruby-neon">
+                    Blac Ruby
+                  </Link>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="text-white hover:text-blac-ruby-neon"
+                  >
+                    <X className="h-6 w-6" />
+                  </Button>
+                </div>
+                
+                {/* Navigation Links */}
+                <nav className="flex flex-col space-y-2 p-6">
+                  <button
+                    onClick={() => handleNavClick('hero')}
+                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    Home
+                  </button>
+                  <button
+                    onClick={() => handleNavClick('bio')}
+                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    About
+                  </button>
+                  <button
+                    onClick={() => handleNavClick('music')}
+                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    Music
+                  </button>
+                  <button
+                    onClick={() => handleNavClick('socials')}
+                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    Socials
+                  </button>
+                  <button
+                    onClick={() => handleNavClick('contact')}
+                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    Contact
+                  </button>
+                </nav>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Sticky Navigation */}
       <header className="sticky top-0 z-50 w-full bg-blac-ruby-black/80 backdrop-blur-md py-4 px-6 md:px-12 flex justify-between items-center border-b border-white/10">
         <Link href="#" className="text-2xl font-bold text-blac-ruby-neon">
@@ -74,7 +198,11 @@ export default function BlacRubyPortfolio() {
             Contact
           </Link>
         </nav>
-        <Button variant="ghost" className="md:hidden text-white">
+        <Button 
+          variant="ghost" 
+          className="md:hidden text-white hover:text-blac-ruby-neon"
+          onClick={() => setIsSidebarOpen(true)}
+        >
           <MenuIcon className="h-6 w-6" />
         </Button>
       </header>
@@ -155,11 +283,12 @@ export default function BlacRubyPortfolio() {
         </section>
 
         {/* Social Handles Section */}
-        <SocialSection/> 
+        <SocialSection/>
+         
         <OutNowSection/>
 
         {/* Fan Quote Block */}
-      <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
+       <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
   <div className="max-w-4xl mx-auto text-center">
     <motion.blockquote
       className="relative text-2xl md:text-3xl italic font-medium text-white/90 leading-relaxed
@@ -229,7 +358,8 @@ export default function BlacRubyPortfolio() {
             </motion.div>
           </div>
         </section>
-      </main> 
+      </main>
+       
       <ContactSection/>
 
       {/* Footer */}

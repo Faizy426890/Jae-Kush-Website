@@ -304,7 +304,7 @@ export default function MusicSection() {
         <motion.div className="text-center mt-12 sm:mt-16 md:mt-20" variants={cardVariants}>
           <div className="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 backdrop-blur-xl border border-white/15 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 max-w-4xl mx-auto shadow-2xl shadow-black/20">
             <div className="inline-flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-purple-400/30 mb-6 sm:mb-8">
-              <Users clfassName="h-4 h-4 sm:h-5 sm:w-5 text-purple-400" />
+              <Users className="h-4 h-4 sm:h-5 sm:w-5 text-purple-400" />
               <span className="text-white font-semibold text-sm sm:text-base">Join 200K+ fans worldwide</span>
             </div>
 
