@@ -4,9 +4,12 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Youtube, Instagram, TwitterIcon as TikTok, Mail, MenuIcon } from "lucide-react"
-import MusicSection from "./components/Music-Section" 
-import SocialSection from "./components/Social"
+import { Mail, MenuIcon } from "lucide-react"
+import MusicSection from "./components/Music-Section"
+import SocialSection from "./components/Social" 
+import ContactSection from "./components/contact-section"
+import HeroSection from "./components/Hero-section" 
+import OutNowSection from "./components/outnow-section"
 
 export default function BlacRubyPortfolio() {
   // Variants for animations
@@ -72,43 +75,13 @@ export default function BlacRubyPortfolio() {
           </Link>
         </nav>
         <Button variant="ghost" className="md:hidden text-white">
-          <MenuIcon className="h-6 w-6" /> {/* Placeholder for mobile menu icon */}
+          <MenuIcon className="h-6 w-6" />
         </Button>
       </header>
 
       <main>
-        {/* Hero Section */}
-        <section
-          id="hero"
-          className="relative h-screen flex flex-col items-center justify-center text-center px-4 py-16 bg-gradient-to-br from-blac-ruby-dark-blue to-blac-ruby-deep-purple"
-        >
-          <div className="absolute inset-0 z-0 opacity-10">
-            {/* Abstract background pattern or particles */}
-            <Image
-              src="/placeholder.svg?height=1080&width=1920"
-              alt="Background pattern"
-              layout="fill"
-              objectFit="cover"
-              quality={100}
-            />
-          </div>
-          <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none text-white drop-shadow-lg"
-            variants={headingVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            Blac Ruby
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-lg md:text-xl text-white/80 max-w-2xl"
-            variants={subheadingVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            Street Elegance. Raw Dedication.
-          </motion.p>
-        </section>
+        {/* Hero Section - Now a separate component */}
+        <HeroSection />
 
         {/* Bio Section - Transformed */}
         <section
@@ -150,7 +123,7 @@ export default function BlacRubyPortfolio() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <Image
-                src="/placeholder.svg?height=400&width=400"
+                src="/profile.jpg"
                 alt="Blac Ruby Portrait"
                 layout="fill"
                 objectFit="cover"
@@ -182,35 +155,38 @@ export default function BlacRubyPortfolio() {
         </section>
 
         {/* Social Handles Section */}
-      <SocialSection/>
+        <SocialSection/> 
+        <OutNowSection/>
 
         {/* Fan Quote Block */}
-        <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.blockquote
-              className="text-2xl md:text-3xl italic font-medium text-white/90 leading-relaxed relative before:content-['“'] before:absolute before:left-0 before:top-0 before:text-6xl before:text-blac-ruby-neon before:opacity-50 before:-translate-x-8 after:content-['”'] after:absolute after:right-0 after:bottom-0 after:text-6xl after:text-blac-ruby-neon after:opacity-50 after:translate-x-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={sectionRevealVariants}
-            >
-              <p className="px-10">
-                {
-                  "Supporters expect me to go hard with my grind and never let up — what makes me different is my story, dedication, and my drive to lead my brand to the top."
-                }
-              </p>
-            </motion.blockquote>
-            <motion.p
-              className="mt-8 text-lg font-semibold text-blac-ruby-neon"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={subheadingVariants}
-            >
-              — Blac Ruby
-            </motion.p>
-          </div>
-        </section>
+      <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
+  <div className="max-w-4xl mx-auto text-center">
+    <motion.blockquote
+      className="relative text-2xl md:text-3xl italic font-medium text-white/90 leading-relaxed
+                 before:content-['“'] before:absolute before:left-0 before:top-0 before:text-6xl before:text-blac-ruby-neon before:opacity-50 before:-translate-x-8
+                 after:content-['”'] after:absolute after:right-0 after:bottom-0 after:text-6xl after:text-blac-ruby-neon after:opacity-50 after:translate-x-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={sectionRevealVariants}
+    >
+      <p className="px-10">
+        Supporters expect me to go hard with my grind and never let up — what makes me different is my story,
+        dedication, and my drive to lead my brand to the top.
+      </p>
+    </motion.blockquote>
+
+    <motion.p
+      className="mt-8 text-lg font-semibold text-blac-ruby-neon"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={subheadingVariants}
+    >
+      — Blac Ruby
+    </motion.p>
+  </div>
+</section>
 
         {/* Contact CTA Section */}
         <section
@@ -253,7 +229,8 @@ export default function BlacRubyPortfolio() {
             </motion.div>
           </div>
         </section>
-      </main>
+      </main> 
+      <ContactSection/>
 
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 text-center text-white/60 text-sm border-t border-white/10 bg-blac-ruby-black">
