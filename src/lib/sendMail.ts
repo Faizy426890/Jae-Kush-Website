@@ -26,7 +26,7 @@ export async function sendContactEmail(formData: FormData) {
 
     const mailOptions = {
       from: '"Black Ruby Team" <weathersportifyteam@gmail.com>',
-      to: "faizytexh@gmail.com",
+      to: "blacruby271@gmail.com",
       subject: `🎵 New Contact: ${subject}`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 650px; margin: 0 auto; background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
