@@ -238,8 +238,7 @@ export default function BlacRubyPortfolio() {
               </div>
               <motion.p className="text-md text-white/70 leading-relaxed" variants={subheadingVariants}>
                 Blac Ruby embodies the fusion of street elegance and raw dedication. With over a decade in the music
-                scene, her journey from Atlanta has been a testament to relentless grind and an unwavering commitment to
-                her craft. Her unique sound and powerful presence set her apart, making her a force to be reckoned with
+                scene,her journey from Atlanta has been a vessel for relentless grind and a passionate commitment to her craft. Her unique sound and powerful presence set her apart, making her a force to be reckoned with
                 in the hip-hop world.
               </motion.p>
             </motion.div>
@@ -365,7 +364,7 @@ export default function BlacRubyPortfolio() {
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 text-center text-white/60 text-sm border-t border-white/10 bg-blac-ruby-black">
         <p>&copy; {new Date().getFullYear()} Blac Ruby. All rights reserved.</p>
-        <p className="mt-2">Designed with {"<3"} by Vercel v0</p>
+        <p className="mt-2">Designed by {"<3"}BlazeTech Solutions</p>
       </footer>
     </div>
   )
