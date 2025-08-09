@@ -152,7 +152,7 @@ export default function HeroSection() {
               <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full animate-pulse" />
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
               <span className="text-sm sm:text-base font-semibold text-white/90 tracking-wide">
-                Atlanta's Rising Star
+                Chicago's Rising Star
               </span>
               <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full animate-pulse" />
             </motion.div>
