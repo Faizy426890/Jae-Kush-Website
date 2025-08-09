@@ -160,10 +160,10 @@ export default function HeroSection() {
             {/* Main Heading */}
             <motion.div className="space-y-4 sm:space-y-6" variants={itemVariants}>
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none">
-                <span className="text-white drop-shadow-2xl">BLAC</span>
+                <span className="text-white drop-shadow-2xl">JAE</span>
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 animate-pulse">
-                  RUBY
+                  KUSH
                 </span>
               </h1>
 
@@ -268,8 +268,8 @@ export default function HeroSection() {
                 {/* Artist Image Placeholder */}
                 <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-purple-500/20 via-blue-500/20 to-cyan-500/20 border border-white/20 mb-8">
                   <img
-                    src="/hero.jpeg"
-                    alt="Blac Ruby - Artist Portrait"
+                    src="/hero.png"
+                    alt="Jae Kush - Artist Portrait"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -283,7 +283,7 @@ export default function HeroSection() {
                   </blockquote>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400"></div>
-                    <span className="text-purple-400 font-semibold">Blac Ruby</span>
+                    <span className="text-purple-400 font-semibold">Jae Kush</span>
                   </div>
                 </div>
               </motion.div>

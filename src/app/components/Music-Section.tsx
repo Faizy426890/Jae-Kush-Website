@@ -43,7 +43,7 @@ export default function MusicSection() {
     {
       name: "Spotify",
       icon: Spotify,
-      link: "https://open.spotify.com/artist/blacruby",
+      link: "https://open.spotify.com/",
       description: "Stream my complete discography with curated playlists and exclusive content",
       stats: "50K+ monthly listeners",
       additionalInfo: "Featured in Hip-Hop Rising",
@@ -56,7 +56,7 @@ export default function MusicSection() {
     {
       name: "YouTube Music",
       icon: Youtube,
-      link: "https://www.youtube.com/@blacruby9509",
+      link: "https://www.youtube.com/@ThaRealJaeKush",
       description: "Official music videos, behind-the-scenes content, and live performances",
       stats: "100K+ total views",
       additionalInfo: "New videos weekly",
@@ -66,32 +66,32 @@ export default function MusicSection() {
       hoverColor: "hover:border-red-400/60",
       shadowColor: "shadow-red-500/20",
     },
-    {
-      name: "Apple Music",
-      icon: Apple,
-      link: "https://music.apple.com/artist/blacruby",
-      description: "High-fidelity streaming with spatial audio and exclusive interviews",
-      stats: "Featured artist",
-      additionalInfo: "Lossless quality available",
-      color: "from-slate-400 to-slate-600",
-      bgColor: "bg-slate-500/15",
-      borderColor: "border-slate-500/25",
-      hoverColor: "hover:border-slate-400/60",
-      shadowColor: "shadow-slate-500/20",
-    },
-    {
-      name: "Pandora",
-      icon: Headphones,
-      link: "https://www.pandora.com/artist/blacruby",
-      description: "Discover similar artists and create personalized radio stations",
-      stats: "Radio ready tracks",
-      additionalInfo: "Algorithm approved",
-      color: "from-blue-400 to-blue-600",
-      bgColor: "bg-blue-500/15",
-      borderColor: "border-blue-500/25",
-      hoverColor: "hover:border-blue-400/60",
-      shadowColor: "shadow-blue-500/20",
-    },
+    // {
+    //   name: "Apple Music",
+    //   icon: Apple,
+    //   link: "https://music.apple.com/artist/blacruby",
+    //   description: "High-fidelity streaming with spatial audio and exclusive interviews",
+    //   stats: "Featured artist",
+    //   additionalInfo: "Lossless quality available",
+    //   color: "from-slate-400 to-slate-600",
+    //   bgColor: "bg-slate-500/15",
+    //   borderColor: "border-slate-500/25",
+    //   hoverColor: "hover:border-slate-400/60",
+    //   shadowColor: "shadow-slate-500/20",
+    // },
+    // {
+    //   name: "Pandora",
+    //   icon: Headphones,
+    //   link: "https://www.pandora.com/artist/blacruby",
+    //   description: "Discover similar artists and create personalized radio stations",
+    //   stats: "Radio ready tracks",
+    //   additionalInfo: "Algorithm approved",
+    //   color: "from-blue-400 to-blue-600",
+    //   bgColor: "bg-blue-500/15",
+    //   borderColor: "border-blue-500/25",
+    //   hoverColor: "hover:border-blue-400/60",
+    //   shadowColor: "shadow-blue-500/20",
+    // },
   ]
 
   const achievements = [
@@ -170,8 +170,8 @@ export default function MusicSection() {
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed font-medium mb-8 sm:mb-12 px-4">
-            Experience the evolution of Street Elegance across all major streaming platforms. From raw street narratives
-            to polished productions, discover the sound that's reshaping Atlanta's hip-hop scene.
+            Experience the evolution of Rapping across all major streaming platforms. From raw street narratives
+            to polished productions, discover the sound that's reshaping Chicago's hip-hop scene.
           </p>
 
           {/* Achievements Grid */}
@@ -313,8 +313,8 @@ export default function MusicSection() {
             </h3>
 
             <p className="text-white/70 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-              From Atlanta to the world, Blac Ruby's music is creating waves across cultures and continents. Don't just
-              listen – become part of the Street Elegance legacy.
+              From Chicago to the world, Jae Kush's music is creating waves across cultures and continents. Don't just
+              listen – become part of the Rapping legacy.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">

@@ -21,10 +21,10 @@ interface Song {
 const songs: Song[] = [
   {
     id: "1",
-    title: "Mars",
+    title: "Before The Deal ",
     description:
-      "A cosmic journey through raw emotions and stellar beats. This track showcases Blac Ruby's ability to blend street narratives with otherworldly production, creating an atmosphere that's both grounded and transcendent.",
-    youtubeUrl: "https://youtu.be/3BQMrSHKNQc?si=BOvWj2ezRmYQ3X5T",
+      "A cosmic journey through raw emotions and stellar beats. This track showcases Jae Kush ability to blend street narratives with otherworldly production, creating an atmosphere that's both grounded and transcendent.",
+    youtubeUrl: "https://youtu.be/eOE_-O6Z2Zo?si=mkvY-uFJ-RU5XonW",
     thumbnail: "/mars.jpg",
     duration: "3:42",
     releaseDate: "2024",
@@ -33,10 +33,10 @@ const songs: Song[] = [
   },
   {
     id: "2",
-    title: "WTF",
+    title: "Even Wit Yo Gun",
     description:
-      "Unapologetic and fierce, this track embodies the raw energy that defines Blac Ruby's sound. With hard-hitting lyrics and an infectious beat, it's a statement piece that demands attention and respect.",
-    youtubeUrl: "https://youtu.be/-PJs9mi2UzA?si=jezTbcZ5zsmcLEUD",
+      "Unapologetic and fierce, this track embodies the raw energy that defines Jae Kush's sound. With hard-hitting lyrics and an infectious beat, it's a statement piece that demands attention and respect.",
+    youtubeUrl: "https://youtu.be/-QRAIaMsqJk?si=XSZvXMjxDiyBuQhZ",
     thumbnail: "/wtf.jpg",
     duration: "2:58",
     releaseDate: "2024",
@@ -45,10 +45,10 @@ const songs: Song[] = [
   },
   {
     id: "3",
-    title: "Ain't Come to Play",
+    title: "Go Remix",
     description:
-      "A declaration of serious intent and unwavering dedication. This track perfectly captures the essence of Blac Ruby's grind mentality, delivering powerful verses over a commanding instrumental that leaves no doubt about her commitment to excellence.",
-    youtubeUrl: "https://youtu.be/4Lg3SHqT63M?si=ewuGFXanlKjCGRwF",
+      "A declaration of serious intent and unwavering dedication. This track perfectly captures the essence of Jae Kush grind mentality, delivering powerful verses over a commanding instrumental that leaves no doubt about His commitment to excellence.",
+    youtubeUrl: "https://youtu.be/2wQame1ZgPQ?si=bPjgjkimdi3j1zma",
     thumbnail: "/aint-come.jpg",
     duration: "4:15",
     releaseDate: "2024",
