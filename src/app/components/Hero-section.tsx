@@ -176,16 +176,16 @@ export default function HeroSection() {
             {/* Tagline & Description */}
             <motion.div className="space-y-4 sm:space-y-6" variants={itemVariants}>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/95 leading-tight">
-                Street Elegance.{" "}
+                Street Knowledge.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
                   Raw Dedication.
                 </span>
               </h2>
 
               <p className="text-lg sm:text-xl text-white/70 leading-relaxed max-w-2xl">
-                From the streets of Atlanta to stages worldwide, I've been crafting my sound for over a decade. My music
+                From the streets of Chicago to stages worldwide, I've been crafting my sound for over a decade. My music
                 isn't just hip-hop – it's a movement that blends raw street narratives with refined artistry, creating
-                the future of <span className="text-purple-400 font-semibold">Street Elegance</span>.
+                the future of <span className="text-purple-400 font-semibold">Rap Scene</span>.
               </p>
 
            
