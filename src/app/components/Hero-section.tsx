@@ -169,7 +169,7 @@ export default function HeroSection() {
 
               <div className="flex items-center gap-4 text-lg sm:text-xl text-white/80">
                 <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400"></div>
-                <span className="font-medium tracking-wide">Brianna Gibson</span>
+                <span className="font-medium tracking-wide">Jovan Jones</span>
               </div>
             </motion.div>
 
