@@ -361,7 +361,7 @@ export default function BlacRubyPortfolio() {
                       </h3>
                       <p className="text-lg text-white/80 leading-relaxed font-light">
                         Jae Kush embodies the fusion of street elegance and raw dedication. With over a decade in the
-                        music scene, his journey from Atlanta has been a vessel for relentless grind and a passionate
+                        music scene, his journey from Chicago has been a vessel for relentless grind and a passionate
                         commitment to his craft. His unique sound and powerful presence set him apart, making him a
                         force to be reckoned with in the hip-hop world.
                       </p>
