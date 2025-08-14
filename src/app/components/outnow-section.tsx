@@ -374,7 +374,7 @@ export default function OutNowSection() {
               More Music Coming Soon
             </h3>
             <p className="text-white/70 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-              Stay tuned for more releases from Blac Ruby. Follow on social media to be the first to know when new
+              Stay tuned for more releases from Jae Kush. Follow on social media to be the first to know when new
               tracks drop.
             </p>
             <div  className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
