@@ -3,12 +3,17 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Star, Sparkles } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export default function AboutSection() {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [charIndex, setCharIndex] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const nextTextTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Text content for typing animation
   const textContent = [
@@ -16,30 +21,104 @@ export default function AboutSection() {
     "Jae Kush embodies the fusion of street elegance and raw dedication. With over a decade in the music scene, his journey from Chicago has been a vessel for relentless grind and a passionate commitment to his craft. His unique sound and powerful presence set him apart, making him a force to be reckoned with in the hip-hop world.",
   ]
 
-  // Letter-by-letter typing effect
+  // Intersection Observer to detect when section is visible
   useEffect(() => {
-    if (currentTextIndex < textContent.length) {
-      setIsTyping(true)
-      const text = textContent[currentTextIndex]
-      let index = 0
-      setDisplayedText("")
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: "-50px 0px -50px 0px", // Add some margin to prevent premature triggering
+      },
+    )
 
-      const typingInterval = setInterval(() => {
-        if (index < text.length) {
-          setDisplayedText(text.slice(0, index + 1))
-          index++
-        } else {
-          clearInterval(typingInterval)
-          setIsTyping(false)
-          setTimeout(() => {
-            setCurrentTextIndex((prev) => (prev + 1) % textContent.length)
-          }, 2000) // Wait 3 seconds before next text
-        }
-      }, 10) // Fast typing speed (30ms per character)
-
-      return () => clearInterval(typingInterval)
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
     }
-  }, [currentTextIndex])
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+
+  // Clear intervals when component unmounts or becomes invisible
+  useEffect(() => {
+    if (!isVisible) {
+      // Clear any running intervals/timeouts when not visible
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current)
+        typingIntervalRef.current = null
+      }
+      if (nextTextTimeoutRef.current) {
+        clearTimeout(nextTextTimeoutRef.current)
+        nextTextTimeoutRef.current = null
+      }
+      setIsTyping(false)
+    }
+  }, [isVisible])
+
+  // Letter-by-letter typing effect - only when visible
+  useEffect(() => {
+    if (!isVisible || currentTextIndex >= textContent.length) return
+
+    setIsTyping(true)
+    const text = textContent[currentTextIndex]
+
+    // Start from current character index or reset if starting new text
+    const startIndex = charIndex === 0 ? 0 : charIndex
+    setDisplayedText(text.slice(0, startIndex))
+
+    typingIntervalRef.current = setInterval(() => {
+      setCharIndex((prevIndex) => {
+        const newIndex = prevIndex + 1
+        if (newIndex <= text.length) {
+          setDisplayedText(text.slice(0, newIndex))
+
+          if (newIndex === text.length) {
+            // Finished typing current text
+            setIsTyping(false)
+
+            // Set timeout for next text
+            nextTextTimeoutRef.current = setTimeout(() => {
+              setCurrentTextIndex((prev) => (prev + 1) % textContent.length)
+              setCharIndex(0) // Reset character index for next text
+            }, 2000)
+
+            // Clear the typing interval
+            if (typingIntervalRef.current) {
+              clearInterval(typingIntervalRef.current)
+              typingIntervalRef.current = null
+            }
+          }
+
+          return newIndex
+        }
+        return prevIndex
+      })
+    }, 10) // Fast typing speed (10ms per character)
+
+    return () => {
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current)
+        typingIntervalRef.current = null
+      }
+      if (nextTextTimeoutRef.current) {
+        clearTimeout(nextTextTimeoutRef.current)
+        nextTextTimeoutRef.current = null
+      }
+    }
+  }, [currentTextIndex, isVisible])
+
+  // Reset animation when becoming visible again
+  useEffect(() => {
+    if (isVisible && displayedText === "" && charIndex === 0) {
+      // Reset to start animation from beginning when section becomes visible
+      setCurrentTextIndex(0)
+    }
+  }, [isVisible])
 
   // Word-by-word animation for "Jae Kush"
   const nameWords = ["Jae", "Kush"]
@@ -79,6 +158,7 @@ export default function AboutSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="bio"
       className="relative py-24 px-6 md:px-12 overflow-hidden min-h-screen"
       style={{
@@ -183,7 +263,7 @@ export default function AboutSection() {
                   </h3>
                   <div className="text-xl text-slate-200 leading-relaxed font-light min-h-[120px]">
                     {displayedText}
-                    {isTyping && (
+                    {isTyping && isVisible && (
                       <motion.span
                         className="inline-block w-0.5 h-6 bg-blue-400 ml-1"
                         animate={{ opacity: [0, 1, 0] }}
