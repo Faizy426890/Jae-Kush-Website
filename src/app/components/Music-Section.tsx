@@ -40,19 +40,19 @@ export default function MusicSection() {
   }
 
   const platforms = [
-    {
-      name: "Spotify",
-      icon: Spotify,
-      link: "https://open.spotify.com/",
-      description: "Stream my complete discography with curated playlists and exclusive content",
-      stats: "50K+ monthly listeners",
-      additionalInfo: "Featured in Hip-Hop Rising",
-      color: "from-green-400 to-emerald-600",
-      bgColor: "bg-green-500/15",
-      borderColor: "border-green-500/25",
-      hoverColor: "hover:border-green-400/60",
-      shadowColor: "shadow-green-500/20",
-    },
+    // {
+    //   name: "Spotify",
+    //   icon: Spotify,
+    //   link: "https://open.spotify.com/",
+    //   description: "Stream my complete discography with curated playlists and exclusive content",
+    //   stats: "50K+ monthly listeners",
+    //   additionalInfo: "Featured in Hip-Hop Rising",
+    //   color: "from-green-400 to-emerald-600",
+    //   bgColor: "bg-green-500/15",
+    //   borderColor: "border-green-500/25",
+    //   hoverColor: "hover:border-green-400/60",
+    //   shadowColor: "shadow-green-500/20",
+    // },
     {
       name: "YouTube Music",
       icon: Youtube,
@@ -318,9 +318,7 @@ export default function MusicSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base shadow-lg shadow-purple-500/25">
-                Follow on All Platforms
-              </Button>
+             
             
             </div>
           </div>

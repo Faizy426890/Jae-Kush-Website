@@ -1,61 +1,72 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Mail, MenuIcon, X, Sparkles, Star } from "lucide-react"
+import { MenuIcon, X } from "lucide-react"
 import MusicSection from "./components/Music-Section"
-import SocialSection from "./components/Social"
 import ContactSection from "./components/contact-section"
 import HeroSection from "./components/Hero-section"
 import OutNowSection from "./components/outnow-section"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import AboutSection from "./components/About"
 
 export default function BlacRubyPortfolio() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Function to handle navigation and close sidebar
   const handleNavClick = (sectionId: string) => {
     setIsSidebarOpen(false)
-    // Small delay to allow sidebar to start closing before scrolling
     setTimeout(() => {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
     }, 100)
   }
 
-  // Variants for animations
-  const headingVariants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  }
-
-  const subheadingVariants = {
-    hidden: { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } },
-  }
-
-  const textLineVariants = {
-    hidden: { opacity: 0, x: -50 },
+  // Word-by-word animation for "Jae Kush"
+  const nameWords = ["Jae", "Kush"]
+  const wordVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
     visible: (i: number) => ({
       opacity: 1,
-      x: 0,
+      y: 0,
+      rotateX: 0,
       transition: {
-        delay: i * 0.05,
-        duration: 0.6,
-        ease: "easeOut",
+        delay: i * 0.3,
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     }),
   }
 
-  const sectionRevealVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  // Lighter animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   }
 
-  const cardItemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
   }
 
   // Sidebar animation variants
@@ -81,55 +92,48 @@ export default function BlacRubyPortfolio() {
   const overlayVariants = {
     closed: {
       opacity: 0,
-      transition: {
-        duration: 0.3,
-      },
+      transition: { duration: 0.3 },
     },
     open: {
       opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
+      transition: { duration: 0.3 },
     },
   }
-
-  // Enhanced about section variants
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 6,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const sparkleVariants = {
-    animate: {
-      scale: [1, 1.2, 1],
-      opacity: [0.5, 1, 0.5],
-      transition: {
-        duration: 2,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  // Updated card styling for a cleaner, professional look
-  const cardBaseClasses = "bg-blac-ruby-card-bg border border-white/10 rounded-xl shadow-lg shadow-black/20"
-  const cardHoverClasses = "hover:scale-[1.02] transition-transform duration-300 ease-in-out"
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blac-ruby-dark-blue to-blac-ruby-deep-purple text-white font-sans overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/30 to-slate-900 text-white font-sans overflow-hidden relative">
+      {/* Checkered Background Pattern */}
+      <div className="fixed inset-0 opacity-[0.02] pointer-events-none">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `
+              linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+              linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+              linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%)
+            `,
+            backgroundSize: "60px 60px",
+            backgroundPosition: "0 0, 0 30px, 30px -30px, -30px 0px",
+          }}
+        />
+      </div>
+
+      {/* Subtle geometric overlay */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute top-20 left-20 w-32 h-32 border border-white/20 rounded-lg rotate-12" />
+        <div className="absolute top-40 right-32 w-24 h-24 border border-white/10 rounded-full" />
+        <div className="absolute bottom-32 left-1/4 w-20 h-20 border border-white/15 rounded-lg rotate-45" />
+        <div className="absolute bottom-20 right-20 w-16 h-16 border border-white/10 rounded-full" />
+      </div>
+
       {/* Mobile Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
             {/* Overlay */}
             <motion.div
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
               variants={overlayVariants}
               initial="closed"
               animate="open"
@@ -139,7 +143,7 @@ export default function BlacRubyPortfolio() {
 
             {/* Sidebar */}
             <motion.div
-              className="fixed top-0 left-0 h-full w-80 bg-blac-ruby-black/95 backdrop-blur-md z-50 md:hidden border-r border-white/10"
+              className="fixed top-0 left-0 h-full w-80 bg-slate-950/95 backdrop-blur-xl z-50 md:hidden border-r border-white/10 shadow-2xl"
               variants={sidebarVariants}
               initial="closed"
               animate="open"
@@ -147,52 +151,44 @@ export default function BlacRubyPortfolio() {
             >
               <div className="flex flex-col h-full">
                 {/* Sidebar Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
-                  <Link href="#" className="text-2xl font-bold text-blac-ruby-neon">
+                <div className="flex items-center justify-between p-6 border-b border-white/10 bg-gradient-to-r from-purple-900/20 to-transparent">
+                  <Link
+                    href="#"
+                    className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                  >
                     Jae Kush
                   </Link>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsSidebarOpen(false)}
-                    className="text-white hover:text-blac-ruby-neon"
+                    className="text-white hover:text-blue-400 hover:bg-white/5 rounded-full"
                   >
                     <X className="h-6 w-6" />
                   </Button>
                 </div>
 
                 {/* Navigation Links */}
-                <nav className="flex flex-col space-y-2 p-6">
-                  <button
-                    onClick={() => handleNavClick("hero")}
-                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    Home
-                  </button>
-                  <button
-                    onClick={() => handleNavClick("bio")}
-                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    About
-                  </button>
-                  <button
-                    onClick={() => handleNavClick("music")}
-                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    Music
-                  </button>
-                  <button
-                    onClick={() => handleNavClick("socials")}
-                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    Socials
-                  </button>
-                  <button
-                    onClick={() => handleNavClick("contact")}
-                    className="text-left text-lg text-white hover:text-blac-ruby-neon transition-colors py-3 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    Contact
-                  </button>
+                <nav className="flex flex-col space-y-1 p-6">
+                  {[
+                    { label: "Home", id: "hero" },
+                    { label: "About", id: "bio" },
+                    { label: "Music", id: "music" },
+                    { label: "Socials", id: "socials" },
+                    { label: "Contact", id: "contact" },
+                  ].map((item, index) => (
+                    <motion.button
+                      key={item.id}
+                      onClick={() => handleNavClick(item.id)}
+                      className="text-left text-lg text-white/80 hover:text-white hover:bg-white/5 transition-all duration-300 py-4 px-4 rounded-xl group relative overflow-hidden"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <span className="relative z-10">{item.label}</span>
+                    </motion.button>
+                  ))}
                 </nav>
               </div>
             </motion.div>
@@ -200,166 +196,176 @@ export default function BlacRubyPortfolio() {
         )}
       </AnimatePresence>
 
-      {/* Sticky Navigation */}
-      <header className="sticky top-0 z-50 w-full bg-blac-ruby-black/80 backdrop-blur-md py-4 px-6 md:px-12 flex justify-between items-center border-b border-white/10">
-        <Link href="#" className="text-2xl font-bold text-blac-ruby-neon">
-          Jae Kush
-        </Link>
-        <nav className="hidden md:flex space-x-8">
-          <Link href="#hero" className="hover:text-blac-ruby-neon transition-colors text-lg">
-            Home
-          </Link>
-          <Link href="#bio" className="hover:text-blac-ruby-neon transition-colors text-lg">
-            About
-          </Link>
-          <Link href="#music" className="hover:text-blac-ruby-neon transition-colors text-lg">
-            Music
-          </Link>
-          <Link href="#socials" className="hover:text-blac-ruby-neon transition-colors text-lg">
-            Socials
-          </Link>
-          <Link href="#contact" className="hover:text-blac-ruby-neon transition-colors text-lg">
-            Contact
-          </Link>
-        </nav>
-        <Button
-          variant="ghost"
-          className="md:hidden text-white hover:text-blac-ruby-neon"
-          onClick={() => setIsSidebarOpen(true)}
-        >
-          <MenuIcon className="h-6 w-6" />
-        </Button>
+      {/* Professional Glassy Navbar */}
+      <header
+        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+          scrolled
+            ? "bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <Link
+              href="#"
+              className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            >
+              Jae Kush
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-1">
+              {[
+                { label: "Home", id: "hero" },
+                { label: "About", id: "bio" },
+                { label: "Music", id: "music" },
+                { label: "Socials", id: "socials" },
+                { label: "Contact", id: "contact" },
+              ].map((item) => (
+                <Link
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="relative px-4 py-2 text-white/80 hover:text-white transition-all duration-300 rounded-lg group overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full group-hover:left-0 transition-all duration-300" />
+                  <span className="relative z-10 font-medium">{item.label}</span>
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA Button - Desktop */}
+            <div className="hidden md:block">
+              <Button
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-6 py-2 rounded-full font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105"
+                onClick={() => handleNavClick("contact")}
+              >
+                Let's Chat
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              className="md:hidden text-white hover:text-blue-400 hover:bg-white/5 rounded-full p-2"
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <MenuIcon className="h-6 w-6" />
+            </Button>
+          </div>
+        </div>
       </header>
 
       <main>
-        {/* Hero Section - Now a separate component */}
+        {/* Hero Section */}
         <HeroSection />
+        <AboutSection />
 
-        {/* Enhanced Bio Section */}
-        <section
+        {/* Enhanced Bio Section with Dark Grid Background */}
+        {/* <section
           id="bio"
-          className="relative py-32 px-6 md:px-12 bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 overflow-hidden"
+          className="relative py-24 px-6 md:px-12 overflow-hidden"
+          style={{
+            background: `
+              linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%),
+              linear-gradient(90deg, rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+              linear-gradient(rgba(30, 41, 59, 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: `100% 100%, 40px 40px, 40px 40px`,
+            backgroundPosition: `0 0, 0 0, 0 0`,
+          }}
         >
-          {/* Animated Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Floating geometric shapes */}
-            <motion.div
-              className="absolute top-20 left-10 w-32 h-32 border border-blac-ruby-neon/20 rounded-full"
-              variants={floatingVariants}
-              animate="animate"
-            />
-            <motion.div
-              className="absolute top-40 right-20 w-24 h-24 border border-blac-ruby-crimson/20 rounded-lg rotate-45"
-              variants={floatingVariants}
-              animate="animate"
-              style={{ animationDelay: "1s" }}
-            />
-            <motion.div
-              className="absolute bottom-32 left-1/4 w-16 h-16 bg-gradient-to-r from-blac-ruby-neon/10 to-blac-ruby-crimson/10 rounded-full blur-xl"
-              variants={floatingVariants}
-              animate="animate"
-              style={{ animationDelay: "2s" }}
-            />
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(71, 85, 105, 0.4) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(71, 85, 105, 0.4) 1px, transparent 1px)
+              `,
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-            {/* Sparkle effects */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{
-                  top: `${20 + i * 15}%`,
-                  left: `${10 + i * 12}%`,
-                }}
-                variants={sparkleVariants}
-                animate="animate"
-                style={{ animationDelay: `${i * 0.5}s` }}
-              >
-                <Sparkles className="w-4 h-4 text-blac-ruby-neon/40" />
-              </motion.div>
-            ))}
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            <div className="absolute top-20 left-10 w-32 h-32 border border-slate-600/20 rounded-full" />
+            <div className="absolute top-40 right-20 w-24 h-24 border border-slate-600/20 rounded-lg rotate-45" />
+            <div className="absolute bottom-32 left-1/4 w-16 h-16 bg-slate-800/30 rounded-full blur-xl" />
           </div>
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blac-ruby-deep-purple/30 via-transparent to-blac-ruby-dark-blue/30" />
-
           <div className="relative z-10 max-w-7xl mx-auto">
-            {/* Section Header */}
             <motion.div
-              className="text-center mb-20"
+              className="text-center mb-16"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              variants={sectionRevealVariants}
+              variants={staggerContainer}
             >
               <motion.div
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blac-ruby-neon/10 to-blac-ruby-crimson/10 border border-blac-ruby-neon/20 mb-6"
-                variants={headingVariants}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900/60 border border-slate-700/50 mb-8 backdrop-blur-sm"
+                variants={fadeInUp}
               >
-                <Star className="w-5 h-5 text-blac-ruby-neon" />
-                <span className="text-blac-ruby-neon font-semibold tracking-wide">ARTIST SPOTLIGHT</span>
-                <Star className="w-5 h-5 text-blac-ruby-neon" />
+                <Star className="w-5 h-5 text-slate-400" />
+                <span className="text-slate-300 font-semibold tracking-wide">ARTIST SPOTLIGHT</span>
+                <Star className="w-5 h-5 text-slate-400" />
               </motion.div>
 
-              <motion.h2
-                className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-white via-blac-ruby-neon to-blac-ruby-crimson bg-clip-text text-transparent leading-tight"
-                variants={headingVariants}
-              >
-                About
-                <br />
-                <span className="italic font-light">Jae Kush</span>
-              </motion.h2>
+              <div className="text-6xl md:text-8xl font-black mb-6 leading-tight">
+                <motion.div variants={fadeInUp} className="text-white mb-2">
+                  About
+                </motion.div>
+                <div className="flex justify-center items-center gap-4 flex-wrap">
+                  {nameWords.map((word, index) => (
+                    <motion.span
+                      key={index}
+                      custom={index}
+                      variants={wordVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      className="italic font-light bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 bg-clip-text text-transparent"
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
-            {/* Main Content Grid */}
             <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Text Content */}
               <motion.div
                 className="space-y-8"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
-                variants={sectionRevealVariants}
+                variants={staggerContainer}
               >
-                {/* Premium Card Container */}
-                <div className="relative p-8 rounded-3xl bg-gradient-to-br from-slate-900/80 via-purple-900/20 to-slate-800/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-blac-ruby-neon/10">
-                  {/* Glowing border effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blac-ruby-neon/20 via-transparent to-blac-ruby-crimson/20 p-[1px]">
-                    <div className="w-full h-full rounded-3xl bg-gradient-to-br from-slate-900/90 via-purple-900/30 to-slate-800/90" />
-                  </div>
+                <motion.div
+                  className="relative p-8 rounded-3xl bg-slate-950/80 backdrop-blur-xl border border-slate-800/50 shadow-2xl"
+                  variants={fadeInUp}
+                >
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-slate-900/20 via-transparent to-slate-800/20" />
 
                   <div className="relative z-10">
-                    {/* Origin Story */}
-                    <motion.div className="mb-8" variants={subheadingVariants}>
-                      <h3 className="text-2xl font-bold text-blac-ruby-neon mb-4 flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blac-ruby-neon rounded-full animate-pulse" />
+                    <motion.div className="mb-8" variants={fadeInUp}>
+                      <h3 className="text-2xl font-bold text-slate-300 mb-4 flex items-center gap-2">
+                        <div className="w-2 h-2 bg-slate-400 rounded-full" />
                         Origin Story
                       </h3>
-                      <div className="text-xl text-white/90 leading-relaxed font-light">
-                        {"Jovan Jones — Born on the southside of Chicago, raised in the Roseland community in a single parent household."
-                          .split(" ")
-                          .map((word, i) => (
-                            <motion.span
-                              key={i}
-                              custom={i}
-                              variants={textLineVariants}
-                              className="inline-block mr-1 hover:text-blac-ruby-neon transition-colors duration-300"
-                            >
-                              {word}
-                            </motion.span>
-                          ))}
-                      </div>
+                      <p className="text-xl text-slate-200 leading-relaxed font-light">
+                        Zahir Jones — Born on the southside of Chicago, raised in the Roseland community in a single
+                        parent household.
+                      </p>
                     </motion.div>
 
-                    {/* Divider */}
-                    <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-blac-ruby-neon/50 to-transparent mb-8" />
+                    <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700/50 to-transparent mb-8" />
 
-                    {/* Artist Statement */}
-                    <motion.div variants={subheadingVariants}>
-                      <h3 className="text-2xl font-bold text-blac-ruby-crimson mb-4 flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blac-ruby-crimson rounded-full animate-pulse" />
+                    <motion.div variants={fadeInUp}>
+                      <h3 className="text-2xl font-bold text-slate-300 mb-4 flex items-center gap-2">
+                        <div className="w-2 h-2 bg-slate-400 rounded-full" />
                         The Artist
                       </h3>
-                      <p className="text-lg text-white/80 leading-relaxed font-light">
+                      <p className="text-lg text-slate-300 leading-relaxed font-light">
                         Jae Kush embodies the fusion of street elegance and raw dedication. With over a decade in the
                         music scene, his journey from Chicago has been a vessel for relentless grind and a passionate
                         commitment to his craft. His unique sound and powerful presence set him apart, making him a
@@ -367,184 +373,136 @@ export default function BlacRubyPortfolio() {
                       </p>
                     </motion.div>
 
-                    {/* Stats/Highlights */}
                     <motion.div
-                      className="grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-white/10"
-                      variants={subheadingVariants}
+                      className="grid grid-cols-2 gap-6 mt-8 pt-8 border-t border-slate-800/50"
+                      variants={fadeInUp}
                     >
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-blac-ruby-neon mb-1">10+</div>
-                        <div className="text-sm text-white/60 uppercase tracking-wide">Years Experience</div>
+                        <div className="text-3xl font-bold text-slate-300 mb-1">10+</div>
+                        <div className="text-sm text-slate-500 uppercase tracking-wide">Years Experience</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-blac-ruby-crimson mb-1">∞</div>
-                        <div className="text-sm text-white/60 uppercase tracking-wide">Dedication</div>
+                        <div className="text-3xl font-bold text-slate-300 mb-1">∞</div>
+                        <div className="text-sm text-slate-500 uppercase tracking-wide">Dedication</div>
                       </div>
                     </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
 
-              {/* Enhanced Image Section */}
               <motion.div
                 className="relative flex justify-center lg:justify-end"
-                initial={{ opacity: 0, scale: 0.8, rotateY: 45 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 1, ease: "easeOut" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                {/* Floating elements around image */}
-                <motion.div
-                  className="absolute -top-8 -left-8 w-16 h-16 border-2 border-blac-ruby-neon/30 rounded-full"
-                  variants={floatingVariants}
-                  animate="animate"
-                />
-                <motion.div
-                  className="absolute -bottom-6 -right-6 w-12 h-12 bg-gradient-to-r from-blac-ruby-crimson/20 to-blac-ruby-neon/20 rounded-lg rotate-45"
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: "1.5s" }}
-                />
-
-                {/* Main image container with premium styling */}
                 <div className="relative">
-                  {/* Glowing backdrop */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blac-ruby-neon/20 to-blac-ruby-crimson/20 rounded-full blur-3xl scale-110" />
+                  <div className="absolute inset-0 bg-slate-800/20 rounded-full blur-2xl scale-110" />
 
-                  {/* Image frame */}
-                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-blac-ruby-neon/20">
-                    {/* Inner glow */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blac-ruby-neon/10 via-transparent to-blac-ruby-crimson/10 z-10" />
-
+                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-slate-700/50 shadow-2xl">
                     <Image
                       src="/profile.png"
                       alt="Jae Kush Portrait"
                       fill
-                      className="object-cover z-0 hover:scale-105 transition-transform duration-700 ease-out"
+                      className="object-cover hover:scale-105 transition-transform duration-700 ease-out"
                     />
-
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
                   </div>
 
-                  {/* Floating name tag */}
                   <motion.div
-                    className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-gradient-to-r from-blac-ruby-black/90 to-slate-900/90 backdrop-blur-xl rounded-full border border-blac-ruby-neon/30 shadow-lg"
+                    className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-slate-950/90 backdrop-blur-xl rounded-full border border-slate-700/50 shadow-lg"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5, duration: 0.6 }}
                   >
-                    <span className="text-blac-ruby-neon font-bold text-lg tracking-wide">JAE KUSH</span>
+                    <span className="text-slate-300 font-bold text-lg tracking-wide">JAE KUSH</span>
                   </motion.div>
                 </div>
               </motion.div>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        {/* Music Links Section - Now a separate component */}
+        {/* Music Links Section */}
         <MusicSection />
 
         {/* Callout for Street Elegance */}
-        <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
+        <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-slate-950 to-purple-950 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
               className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg leading-tight"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
-              variants={sectionRevealVariants}
+              variants={fadeInUp}
             >
               Turn your struggles into verses <br className="hidden md:block" />{" "}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blac-ruby-crimson to-blac-ruby-neon">
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
                 Jae Kush
               </span>
             </motion.h2>
           </div>
         </section>
 
-        {/* Social Handles Section */}
-        {/* <SocialSection /> */}
-
         <OutNowSection />
 
         {/* Fan Quote Block */}
-        <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-blac-ruby-dark-blue to-blac-ruby-deep-purple relative z-10">
+        <section className="py-20 px-6 md:px-12 bg-gradient-to-b from-purple-950 to-slate-950 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               className="relative text-2xl md:text-3xl italic font-medium text-white/90 leading-relaxed"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
-              variants={sectionRevealVariants}
+              variants={fadeInUp}
             >
-              <span className="absolute left-0 top-0 text-6xl text-blac-ruby-neon opacity-50 -translate-x-8">"</span>
+              <span className="absolute left-0 top-0 text-6xl text-blue-400 opacity-50 -translate-x-8">"</span>
               <p className="px-10">
                 Supporters expect me to go hard with my grind and never let up — what makes me different is my story,
                 dedication, and my drive to lead my brand to the top.
               </p>
-              <span className="absolute right-0 bottom-0 text-6xl text-blac-ruby-neon opacity-50 translate-x-8">"</span>
+              <span className="absolute right-0 bottom-0 text-6xl text-blue-400 opacity-50 translate-x-8">"</span>
             </motion.div>
             <motion.p
-              className="mt-8 text-lg font-semibold text-blac-ruby-neon"
+              className="mt-8 text-lg font-semibold text-blue-400"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
-              variants={subheadingVariants}
+              variants={fadeInUp}
             >
               — Jae Kush
             </motion.p>
-          </div>
-        </section>
 
-        {/* Contact CTA Section */}
-        {/* <section
-          id="contact"
-          className="py-20 px-6 md:px-12 bg-gradient-to-br from-blac-ruby-deep-purple to-blac-ruby-dark-blue relative z-10"
-        >
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6 text-blac-ruby-neon"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={headingVariants}
-            >
-              Get in Touch
-            </motion.h2>
-            <motion.p
-              className="text-lg text-white/80 mb-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={subheadingVariants}
-            >
-              For bookings, collaborations, or inquiries, feel free to reach out.
-            </motion.p>
             <motion.div
-              className={`${cardBaseClasses} inline-flex items-center p-4 space-x-4`}
+              className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
-              variants={sectionRevealVariants}
+              variants={fadeInUp}
             >
-              <Mail className="h-8 w-8 text-blac-ruby-neon" />
-              <Link
-                href="mailto:blacruby271@gmail.com"
-                className="text-xl md:text-2xl font-semibold text-white hover:text-blac-ruby-neon transition-colors"
+              <Button
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 px-8 py-3 rounded-full font-medium shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40 transition-all duration-300 hover:scale-105"
+                onClick={() => window.open("https://www.instagram.com/jaekush111?igsh=MWdmZjV2NXN6OTU2dg==", "_blank")}
               >
-                blacruby271@gmail.com
-              </Link>
+                Follow for updates
+              </Button>
+              <Button
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-8 py-3 rounded-full font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105"
+                onClick={() => window.open("https://www.instagram.com/jaekush111?igsh=MWdmZjV2NXN6OTU2dg==", "_blank")}
+              >
+                Follow on Instagram
+              </Button>
             </motion.div>
           </div>
-        </section> */}
+        </section>
       </main>
 
       <ContactSection />
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 text-center text-white/60 text-sm border-t border-white/10 bg-blac-ruby-black">
+      <footer className="py-8 px-6 md:px-12 text-center text-white/60 text-sm border-t border-white/10 bg-slate-950">
         <p>&copy; {new Date().getFullYear()} Jae Kush. All rights reserved.</p>
         <p className="mt-2">Designed by {"<3"}BlazeTech Solutions</p>
       </footer>

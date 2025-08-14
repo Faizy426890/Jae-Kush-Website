@@ -378,9 +378,15 @@ export default function OutNowSection() {
               tracks drop.
             </p>
             <div  className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base">
-                Follow for Updates
-              </Button>
+             <a
+  href="https://youtube.com/@tharealjaekush?si=W_FnsBvPdhhQQNyh" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base inline-block"
+>
+  Subscribe on YouTube
+</a>
+
              
             </div>
           </div>
