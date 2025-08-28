@@ -17,8 +17,8 @@ export default function AboutSection() {
 
   // Text content for typing animation
   const textContent = [
-    "Zahir Jones — Born on the southside of Chicago, raised in the Roseland community in a single parent household.",
-    "Jae Kush embodies the fusion of street elegance and raw dedication. With over a decade in the music scene, his journey from Chicago has been a vessel for relentless grind and a passionate commitment to his craft. His unique sound and powerful presence set him apart, making him a force to be reckoned with in the hip-hop world.",
+    "Zach Garsson — Born on the southside of Connecticut, aims to change the entertainment industry with music.",
+    "Louie Z embodies the fusion of street elegance and raw dedication. With over a decade in the music scene, his journey from Connecticut has been a vessel for relentless grind and a passionate commitment to his craft. His unique sound and powerful presence set him apart, making him a force to be reckoned with in the hip-hop world.",
   ]
 
   // Intersection Observer to detect when section is visible
@@ -121,7 +121,7 @@ export default function AboutSection() {
   }, [isVisible])
 
   // Word-by-word animation for "Jae Kush"
-  const nameWords = ["Jae", "Kush"]
+  const nameWords = ["Louie", "Z"]
   const wordVariants = {
     hidden: { opacity: 0, y: 50, rotateX: -90 },
     visible: (i: number) => ({
@@ -325,7 +325,7 @@ export default function AboutSection() {
               {/* Image Container */}
               <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-slate-800/50 shadow-2xl shadow-blue-500/20">
                 <Image
-                  src="/profile.png"
+                  src="/profile.jpg"
                   alt="Jae Kush - Professional Artist Portrait"
                   fill
                   className="object-cover hover:scale-110 transition-transform duration-700 ease-out"
@@ -369,7 +369,7 @@ export default function AboutSection() {
               >
                 <div className="text-center">
                   <span className="text-white font-bold text-xl tracking-wide bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    JAE KUSH
+                   Louie Z
                   </span>
                 </div>
               </motion.div>
@@ -394,7 +394,7 @@ export default function AboutSection() {
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY }}
               >
-                CHICAGO
+                Connecticut
               </motion.div>
             </div>
           </motion.div>

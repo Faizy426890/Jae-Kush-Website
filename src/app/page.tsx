@@ -33,7 +33,7 @@ export default function BlacRubyPortfolio() {
   }
 
   // Word-by-word animation for "Jae Kush"
-  const nameWords = ["Jae", "Kush"]
+  const nameWords = ["Louie", "Z"]
   const wordVariants = {
     hidden: { opacity: 0, y: 50, rotateX: -90 },
     visible: (i: number) => ({
@@ -156,7 +156,7 @@ export default function BlacRubyPortfolio() {
                     href="#"
                     className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
                   >
-                    Jae Kush
+                    Louie Z
                   </Link>
                   <Button
                     variant="ghost"
@@ -211,7 +211,7 @@ export default function BlacRubyPortfolio() {
               href="#"
               className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
             >
-              Jae Kush
+              Louie Z
             </Link>
 
             {/* Desktop Navigation */}
@@ -440,7 +440,7 @@ export default function BlacRubyPortfolio() {
             >
               Turn your struggles into verses <br className="hidden md:block" />{" "}
               <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                Jae Kush
+                Louie Z
               </span>
             </motion.h2>
           </div>
@@ -472,7 +472,7 @@ export default function BlacRubyPortfolio() {
               viewport={{ once: true, amount: 0.5 }}
               variants={fadeInUp}
             >
-              — Jae Kush
+              — Louie Z
             </motion.p>
 
             <motion.div
@@ -503,7 +503,7 @@ export default function BlacRubyPortfolio() {
 
       {/* Footer */}
       <footer className="py-8 px-6 md:px-12 text-center text-white/60 text-sm border-t border-white/10 bg-slate-950">
-        <p>&copy; {new Date().getFullYear()} Jae Kush. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Louie Z. All rights reserved.</p>
         <p className="mt-2">Designed by {"<3"}BlazeTech Solutions</p>
       </footer>
     </div>
